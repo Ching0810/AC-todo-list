@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import clsx from 'clsx'
 
 const StyledAddTodoContainer = styled.div`
   min-height: 52px;
@@ -67,15 +68,33 @@ const StyledAddTodoActionContainer = styled.div`
     }
   }
 `;
-const TodoInput = () => {
+const TodoInput = ({inputValue, onChangeFunc, onKeyDown, onAddTodo }) => {
   return (
-    <StyledAddTodoContainer>
+    <StyledAddTodoContainer 
+      className={clsx('', {active: inputValue.length > 0 })}
+    >
       <StyledLabelIcon className="icon" htmlFor="add-todo-input" />
       <StyledInputContainer>
-        <input id="add-todo-input" type="text" placeholder="新增工作" />
+        {/* ?. operator is used to check whether onChangeFunc is undefined or null */}
+        <input 
+          id="add-todo-input" 
+          type="text" 
+          placeholder="新增工作" 
+          value={inputValue} 
+          onChange={(e) => {
+            onChangeFunc?.(e.target.value)
+          }}
+          onKeyDown={(e)=>{
+            if(e.key==='Enter'){
+              onKeyDown?.()
+            }
+          }}
+        />
       </StyledInputContainer>
-      <StyledAddTodoActionContainer>
-        <button className="btn-reset">新增</button>
+      <StyledAddTodoActionContainer
+        className={clsx('', {active: inputValue.length > 0 })}
+      >
+        <button className="btn-reset" onClick={() => onAddTodo?.()} >新增</button>
       </StyledAddTodoActionContainer>
     </StyledAddTodoContainer>
   );

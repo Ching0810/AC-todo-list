@@ -1,4 +1,5 @@
 import { Footer, Header, TodoCollection, TodoInput } from 'components';
+import { useState } from 'react';
 
 const dummyTodos = [
   {
@@ -24,12 +25,102 @@ const dummyTodos = [
 ];
 
 const TodoPage = () => {
+  const [inputeValue, setInputValue] = useState('')
+  const [todos, setTodos] = useState(dummyTodos)
+  const handleChange = (value) => {
+    setInputValue(value)
+  }
+
+  const handleAddTodo = () => {
+    if(inputeValue.length===0) {
+      return
+    }
+    setTodos(prevTodos=> {
+      return [...prevTodos, 
+      {
+        id: Math.random()*100,
+        title: inputeValue,
+        isDone: false
+      }]
+    })
+    setInputValue('')
+  }
+
+  const handleKeyDown = () => {
+    if(inputeValue.length===0) {
+      return
+    }
+    setTodos(prevTodos=> {
+      return [...prevTodos, 
+      {
+        id: Math.random()*100,
+        title: inputeValue,
+        isDone: false
+      }]
+    })
+    setInputValue('')
+  }
+
+  // what argument name does not matter for handleToggleDone function received
+  const handleToggleDone = (id) => {
+    setTodos((prevTodos)=>{
+      return prevTodos.map(todo=>{
+        if(todo.id === id) {
+          return {
+            ...todo,
+            isDone:!todo.isDone
+          }
+        }
+        return todo
+      })
+    })
+  }
+
+  const handleDoubleClick = ({id, isEdit})=>{
+    setTodos((prevTodos)=>{
+      return prevTodos.map((todo)=>{
+        if (todo.id === id) {
+          return {
+            ...todo,
+            isEdit
+          }
+        }
+        return {...todo, isEdit:false}
+      })
+    })
+  }
+  const handleSave = ({id,title}) => {
+    setTodos(prevTodos=>{
+      return prevTodos.map(todo=>{
+        if(todo.id === id) {
+          return {
+            ...todo,
+            title,
+            isEdit:false
+          }
+        }
+        return todo
+      })
+    })
+  }
+
   return (
     <div>
       TodoPage
       <Header />
-      <TodoInput />
-      <TodoCollection />
+      {/* onChangeFunc is a props with setInputValue function */}
+      <TodoInput 
+        inputValue={inputeValue} 
+        onChangeFunc={handleChange} 
+        onAddTodo={handleAddTodo} 
+        onKeyDown={handleKeyDown}
+      />
+      <TodoCollection 
+        todos={todos}
+        onToggleDone={handleToggleDone}
+        onChangeMode={handleDoubleClick}
+        onSave={handleSave}
+      />
       <Footer />
     </div>
   );
