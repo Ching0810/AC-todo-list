@@ -27,6 +27,7 @@ const dummyTodos = [
 const TodoPage = () => {
   const [inputeValue, setInputValue] = useState('')
   const [todos, setTodos] = useState(dummyTodos)
+  const [count, setCount] = useState(dummyTodos.length)
   const handleChange = (value) => {
     setInputValue(value)
   }
@@ -36,12 +37,14 @@ const TodoPage = () => {
       return
     }
     setTodos(prevTodos=> {
-      return [...prevTodos, 
+      const newTodos = [...prevTodos, 
       {
         id: Math.random()*100,
         title: inputeValue,
         isDone: false
-      }]
+      }];
+      setCount(newTodos.length);
+      return newTodos;
     })
     setInputValue('')
   }
@@ -51,12 +54,14 @@ const TodoPage = () => {
       return
     }
     setTodos(prevTodos=> {
-      return [...prevTodos, 
+      const newTodos = [...prevTodos, 
       {
         id: Math.random()*100,
         title: inputeValue,
         isDone: false
-      }]
+      }];
+      setCount(newTodos.length);
+      return newTodos;
     })
     setInputValue('')
   }
@@ -91,7 +96,7 @@ const TodoPage = () => {
   }
   const handleSave = ({id,title}) => {
     setTodos(prevTodos=>{
-      return prevTodos.map(todo=>{
+      const newTodos =  prevTodos.map(todo=>{
         if(todo.id === id) {
           return {
             ...todo,
@@ -101,11 +106,15 @@ const TodoPage = () => {
         }
         return todo
       })
+      setCount(newTodos.length)
+      return newTodos
     })
   }
   const handleDelete = ({id}) => {
     setTodos(prevTodos=>{
-      return prevTodos.filter(todo => todo.id !== id)
+      const newTodos = prevTodos.filter(todo => todo.id !== id)
+      setCount(newTodos.length)
+      return newTodos
     })
   }
 
@@ -127,7 +136,7 @@ const TodoPage = () => {
         onSave={handleSave}
         onDelete={handleDelete}
       />
-      <Footer />
+      <Footer count={count}/>
     </div>
   );
 };
