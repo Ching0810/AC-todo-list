@@ -36,6 +36,6 @@ npm start
 ```
 5. The project is ran successfully while seeing the following info in Terminal:
 ```
-webpack compiled successfully
+Compiled successfully!
 ```
 6. Press "ctrl + c" in Terminal if you want to stop running the project.
