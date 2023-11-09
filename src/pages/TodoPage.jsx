@@ -50,7 +50,7 @@ const TodoPage = () => {
           isDone: data.isDone,
           isEdit: false 
         }];
-        setCount(newTodos.length);
+        setCount(count+1);
         return newTodos;
       })
       setInputValue('')
@@ -76,7 +76,7 @@ const TodoPage = () => {
           isDone: data.isDone,
           isEdit: false 
         }];
-        setCount(newTodos.length);
+        setCount(count+1);
         return newTodos;
       })
       setInputValue('')
@@ -140,7 +140,6 @@ const TodoPage = () => {
           }
           return todo
         })
-        setCount(newTodos.length)
         return newTodos
       })
     }catch(error){
@@ -153,7 +152,7 @@ const TodoPage = () => {
       await deleteTodo(id)
       setTodos(prevTodos=>{
         const newTodos = prevTodos.filter(todo => todo.id !== id)
-        setCount(newTodos.length)
+        setCount(count-1)
         return newTodos
       })
     }catch(error){
