@@ -4,6 +4,8 @@
 
 # Progress
 - Finished delete and items counter function
+- Finished API function
+- Utilize json-server library to simulate server
 
 # Result
 <br/>
@@ -30,12 +32,16 @@ git clone https://github.com/Ching0810/AC-todo-list.git
 ```
 npm install
 ```
-4. After installment, run:
+4. After installment, run below line to render page:
 ```
 npm start
 ```
-5. The project is ran successfully while seeing the following info in Terminal:
+5. Run below line to start server:
+```
+npm run dev-server
+```
+6. The project is ran successfully while seeing the following info in Terminal:
 ```
 Compiled successfully!
 ```
-6. Press "ctrl + c" in Terminal if you want to stop running the project.
+7. Press "ctrl + c" in Terminal if you want to stop running the project.
