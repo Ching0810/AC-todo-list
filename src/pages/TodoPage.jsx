@@ -130,7 +130,7 @@ const TodoPage = () => {
         title
       })
       setTodos(prevTodos=>{
-        const newTodos =  prevTodos.map(todo=>{
+        const newTodos = prevTodos.map(todo=>{
           if(todo.id === id) {
             return {
               ...todo,

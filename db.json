@@ -7,7 +7,7 @@
     },
     {
       "title": "Learn to create custom hooks",
-      "isDone": true,
+      "isDone": false,
       "id": 2
     },
     {
@@ -24,6 +24,16 @@
       "title": "Learn something",
       "isDone": false,
       "id": 8
+    },
+    {
+      "title": "Learn postman",
+      "isDone": false,
+      "id": 5
+    },
+    {
+      "title": "Prepare interview",
+      "isDone": false,
+      "id": 9
     }
   ]
 }
