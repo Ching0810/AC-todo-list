@@ -9,7 +9,7 @@ export const login = async ({username, password}) => {
       password
     })
 
-    console.log(data)
+    // console.log(data)
 
     const {authToken} = data
 
